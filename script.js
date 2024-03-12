@@ -42,16 +42,6 @@ $(document).ready(function () {
       var formData = new FormData();
       formData.append("image", blob);
       processImage(formData);
-      // context.drawImage(video, 0, 0, 400, 300);
-      // canvas.toBlob(function (blob) {
-      //   var formData = new FormData();
-      //   formData.append("image", blob);
-      //   console.log("blob.type is ", blob.type);
-      //   console.log("dimensions width is ", blob.width);
-      //   console.log("dimensions height is ", blob.height);
-      //   console.log('formData is ', formData);
-
-      //   processImage(formData);
     });
   });
 
@@ -59,10 +49,10 @@ $(document).ready(function () {
     $.ajax({
       url: "https://cv-instance-analyseimg-northeur.cognitiveservices.azure.com/computervision/imageanalysis:analyze?api-version=2024-02-01&features=people&model-version=latest&language=en&gender-neutral-caption=False",
       type: "POST",
-      data: formData,
-      processData: false,
-      //   contentType: "application/octet-stream",
-      contentType: "multipart/form-data",
+      data: JSON.stringify({
+        url: "https://raw.githubusercontent.com/Azure/azure-sdk-for-java/main/sdk/vision/azure-ai-vision-imageanalysis/src/samples/java/com/azure/ai/vision/imageanalysis/sample.jpg",
+      }),
+      contentType: "application/json",
       headers: {
         "Ocp-Apim-Subscription-Key": "169ba26709814440839c99da449b5421",
       },
